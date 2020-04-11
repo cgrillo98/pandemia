@@ -1,0 +1,337 @@
+<!-- Code from d3-graph-gallery.com -->
+<html>
+
+<head>
+  <!-- <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script> -->
+  <!-- Load d3.js -->
+  <!-- <script src="https://d3js.org/d3.v4.js"></script> -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+Double+Pica&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-image: url(peste2.jpg);
+      background-repeat: no-repeat;
+    }
+
+    .axisRed line {
+       stroke: #fcfcfc; 
+   }
+
+    .axisRed path {
+      stroke: #fcfcfc;
+   }
+
+    .axisRed text {
+      fill: #ead5cb;
+      text-align: center;
+      font-size: 17px;
+      font-family: 'IM Fell Double Pica', serif;
+      color: #999999;
+    }
+
+    div {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 100%;
+      font-weight: normal;
+      text-transform: uppercase;
+      color: #999999;
+      text-decoration: underline;
+      text-align: center;
+      text-decoration-color: #999999;
+    }
+
+    p.textbog {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 120%;
+      font-weight: normal;
+      text-transform: none;
+      color: #f6db5f;
+      text-align: center;
+
+      width: 20%;
+      float: none;
+      margin-left: 40%;
+    }
+
+    p.textsm {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 120%;
+      font-weight: normal;
+      text-transform: none;
+      color: #FF7C9C;
+      text-align: center;
+
+      width: 20%;
+      float: none;
+      margin-left: 40%;
+    }
+
+
+
+  p.texttot {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 120%;
+      font-weight: normal;
+      text-transform: none;
+      color: #FF7C9C;
+      text-align: center;
+
+      width: 20%;
+      float: none;
+      margin-left: 40%;
+    }
+
+
+    p.cred {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 90%;
+      font-weight: normal;
+      color: #999999;
+      text-align: center;
+      width: 100%;
+      float: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+	
+	
+	    p.cred2 {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 70%;
+	font-weight: normal;
+	color: #999999;
+	text-align: center;
+	width: 100%;
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+    }
+	
+
+    .svg-tooltip {
+	background-color: #f6f4f5;
+	color: #a599a5;
+	padding-right: 5%;
+	padding-left: 5%;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	font-family: 'IM Fell Double Pica', serif;
+	font-size: 5px;
+    }
+	
+	
+  </style>
+</head>
+
+<body>
+  <title>-datos de inter&eacute;s personal-</title>
+  <div>
+<span class="text">- pseudodata -</span>
+</div>
+
+<!-- Create a div where the graph will take place -->
+
+<div id="my_dataviz"></div>
+  <div class="example_div"></div>
+  <p class="cred">Casos Positivos Covid19 en el Tiempo<br>
+  BOGOT&Aacute;: <img src="bog.jpg"> SANTA MARTA: <img
+      src="sm.jpg"> COLOMBIA: <img src="tot.jpg"></p>
+<p class="cred2"><br>
+  Fuente: Datos Abiertos,  6 Marzo - 10 Abril  2020,
+
+  </span>(www.datos.gov.co) <br>
+  Imagen: Georg Steinhausen - 1889 (Editada)<br>
+</p>
+<script type="text/javascript">
+
+    // set the dimensions and margins of the graph
+    var margin = { top: 40, right: 30, bottom: 70, left: 60 },
+      width = 1180 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg = d3.select("#my_dataviz")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+    //Read the data
+    d3.csv("csv5.csv").then(function (data) {
+      // console.log("data xx", data)
+      // console.log(data)
+      // console.log("mmm")
+
+
+
+      // console.log(data);
+      // Add X axis
+      var x = d3.scaleLinear()
+        .domain([0, 40])
+        .range([0, width]);//////////////////////////////////
+      svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "axisRed")
+        .call(d3.axisBottom(x));
+
+
+
+      svg.append("text")      // text label for the x axis
+        .attr("x", width / 2)
+        .attr("y", height * 0.90 + margin.bottom)
+        .style("text-anchor", "middle")
+        .style("fill", "#ead5cb")
+        .style("font-family", "IM Fell Double Pica")
+        .style("font-size", "10px")
+        .text("DIAS")
+
+      // Add Y axis
+      var y = d3.scaleLinear()
+        .domain([0, 320])
+        .range([height, 0]);////////////////////////////////////////////
+      svg.append("g")
+        .attr("class", "axisRed")
+        .call(d3.axisLeft(y));
+
+
+      svg.append("text")   // text label for the y axis
+
+        .attr("y", -55)
+        .attr("x", -180)
+        .attr("dy", "1em")
+        .attr("transform", "rotate(-90)")
+        .style("text-anchor", "middle")
+        .style("fill", "#ead5cb")
+        .style("font-size", "85%")
+        .style("font-family", "IM Fell Double Pica")
+        .style("font-size", "10px")
+        .text("CASOS POSITIVOS")
+
+      // Color scale: give me a specie name, I return a color
+      var color = d3.scaleOrdinal()
+        .domain(["SM", "BOG", "COL"])
+        .range(["#FF7C9C", "#ffd700", "#B674BD"])
+
+
+
+
+
+      // Highlight the specie that is hovered
+      var highlight = function (d) {
+
+        selected_specie = d.Species
+
+        d3.selectAll(".dot")
+          .transition()
+          .duration(200)
+          .style("fill", "#cbf4eb")
+          //.style("background-color", "#ffffff")
+          .attr('width', 17)
+          .attr('height', 8)           //  radio gris
+		  
+
+		  
+		  
+
+
+        d3.selectAll("." + selected_specie)
+          .transition()
+          .duration(200)
+          //  .style("fill", "#ffffff")
+          .style("fill", color(selected_specie))
+          .attr('width', 17)
+          .attr('height', 8)  //  radio ROLLOVER
+
+      }
+
+      // Highlight the specie that is hovered
+      var doNotHighlight = function () {
+        d3.selectAll(".dot")
+          .transition()
+          .duration(200)
+          .style("fill", function (d) { return color(d.Species) })
+          .attr('width', 17)
+          .attr('height', 8)  //radio final despues de interacci´on
+      }
+
+      let lado = 17;
+      let alto = 8;
+      // Add dots
+      svg.append('g')
+        .attr("class", "jj")
+        .selectAll(".dot")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("class", function (d) { return "dot " + d.Species })
+        .attr("y", function (d) { return y(d.coor2) - alto / 2; })
+        .attr("x", function (d) { return x(d.coor1) - lado / 2; })
+        .attr("dx", -50)
+        .attr('width', lado)
+        .attr('height', alto)         //----------------------------------------radio inicial
+        .style("fill", function (d) { return color(d.Species) })
+       // .style("stroke", "black")
+        .on("mouseover", highlight)
+        .on("mouseleave", doNotHighlight)
+
+
+
+
+
+
+
+
+      // *************************************************
+      // *************************************************
+      // *************************************************
+      // INICIO tooltip
+
+      const tooltip = d3.select("body").append("div")
+        .attr("class", "svg-tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+		.style("color", "ffff")
+      //  .text("I'm a circle!");
+
+      d3.selectAll(".dot")
+        .on("mouseover", function () {
+          return tooltip.style("visibility", "visible");
+        })
+        .on("mousemove", function (d) {
+
+          const text = `
+            <table>
+              <tr>
+                <td>${d.Species} / dia:${d.coor1} / casos:${d.coor2}</td>
+              </tr>
+            </table>
+          `;
+
+          return tooltip
+            .style("top", (d3.event.pageY - 10) + "px")
+            .style("left", (d3.event.pageX + 10) + "px")
+            .html(text)
+            ;
+        })
+        .on("mouseout", function () {
+          return tooltip.style("visibility", "hidden");
+        });
+
+      // FIN tooltip
+      // *************************************************
+      // *************************************************
+      // *************************************************
+
+
+    }
+    )
+
+
+  </script>
+
+</body>
+
+</html>
