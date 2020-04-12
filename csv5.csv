@@ -31,6 +31,7 @@ coor1,coor2,Species
 34,131,BOG
 35,38,BOG
 36,92,BOG
+37,44,BOG
 15,2,SM
 18,1,SM
 19,1,SM
@@ -43,6 +44,7 @@ coor1,coor2,Species
 34,11,SM
 35,4,SM
 36,10,SM
+37,14,SM
 1,1,COL
 4,2,COL
 6,6,COL
@@ -76,3 +78,4 @@ coor1,coor2,Species
 34,274,COL
 35,169,COL
 36,250,COL
+37,236,COL
