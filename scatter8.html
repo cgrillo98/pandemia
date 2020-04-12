@@ -1,4 +1,3 @@
-<!-- Code from d3-graph-gallery.com -->
 <html>
 
 <head>
@@ -37,9 +36,9 @@
       font-weight: normal;
       text-transform: uppercase;
       color: #999999;
-      text-decoration: underline;
+    
       text-align: center;
-      text-decoration-color: #999999;
+    
     }
 
     p.textbog {
@@ -94,34 +93,46 @@
       float: none;
       margin-left: auto;
       margin-right: auto;
+      margin-top: 10%;
     }
-	
-	
-	    p.cred2 {
-	font-family: "Courier New", Courier, monospace;
-	font-size: 70%;
-	font-weight: normal;
-	color: #999999;
-	text-align: center;
-	width: 100%;
-	float: none;
-	margin-left: auto;
-	margin-right: auto;
+    
+    
+        p.cred2 {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 70%;
+    font-weight: normal;
+    color: #999999;
+    text-align: center;
+    width: 100%;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
     }
-	
+    
 
     .svg-tooltip {
-	background-color: #f6f4f5;
-	color: #a599a5;
-	padding-right: 5%;
-	padding-left: 5%;
-	padding-bottom: 0px;
-	padding-top: 0px;
-	font-family: 'IM Fell Double Pica', serif;
-	font-size: 5px;
+    width: 20%;
+    text-align: center;
+    margin: auto;
+    float: none;
+    padding-top: 2px;
+    padding-bottom: 2px;
     }
-	
-	
+    
+    .subHeader{
+    font-family: "Courier New", Courier, monospace;
+    color: #26A6C7;
+    font-size: 54px;
+    text-decoration: none;
+    text-transform: lowercase;
+    margin-top: 3px;
+    margin-left: 3px;
+    float: none;
+    }
+    
+    
+    
+    
   </style>
 </head>
 
@@ -148,7 +159,7 @@
 
     // set the dimensions and margins of the graph
     var margin = { top: 40, right: 30, bottom: 70, left: 60 },
-      width = 1180 - margin.left - margin.right,
+      width = 1100 - margin.left - margin.right,
       height = 400 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
@@ -229,12 +240,12 @@
           .duration(200)
           .style("fill", "#cbf4eb")
           //.style("background-color", "#ffffff")
-          .attr('width', 17)
+          .attr('width',18)
           .attr('height', 8)           //  radio gris
-		  
+          
 
-		  
-		  
+          
+          
 
 
         d3.selectAll("." + selected_specie)
@@ -242,7 +253,7 @@
           .duration(200)
           //  .style("fill", "#ffffff")
           .style("fill", color(selected_specie))
-          .attr('width', 17)
+          .attr('width', 18)
           .attr('height', 8)  //  radio ROLLOVER
 
       }
@@ -253,11 +264,11 @@
           .transition()
           .duration(200)
           .style("fill", function (d) { return color(d.Species) })
-          .attr('width', 17)
+          .attr('width', 18)
           .attr('height', 8)  //radio final despues de interacci´on
       }
 
-      let lado = 17;
+      let lado = 18;
       let alto = 8;
       // Add dots
       svg.append('g')
@@ -288,12 +299,13 @@
       // *************************************************
       // *************************************************
       // INICIO tooltip
+    
 
       const tooltip = d3.select("body").append("div")
         .attr("class", "svg-tooltip")
         .style("position", "absolute")
         .style("visibility", "hidden")
-		.style("color", "ffff")
+        .style("color", "ffff")
       //  .text("I'm a circle!");
 
       d3.selectAll(".dot")
@@ -305,8 +317,19 @@
           const text = `
             <table>
               <tr>
-                <td>${d.Species} / dia:${d.coor1} / casos:${d.coor2}</td>
+                <td class="subHeader" >- ${d.Species} -</td>
               </tr>
+              <tr>
+                <td class="subHeader" >d&iacute;a:${d.coor1}</td>
+              </tr>
+              <tr>
+                <td class="subHeader" >casos:${d.coor2}</td>
+              </tr>
+              
+              
+              
+              
+              
             </table>
           `;
 
@@ -319,6 +342,8 @@
         .on("mouseout", function () {
           return tooltip.style("visibility", "hidden");
         });
+        
+        
 
       // FIN tooltip
       // *************************************************
